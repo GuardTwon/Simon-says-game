@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { Context } from "../../context/Context";
 
-export const Board = ({ currentScore }) => {
+export const Board = () => {
+  const{score,}=useContext(Context)
+
   return (
     <div className="  grid justify-items-end">
       <div className=" m-4 w-28 border-2 border-gray-800 rounded-md text-center   ">
@@ -11,7 +14,11 @@ export const Board = ({ currentScore }) => {
             </tr>
           </thead>
           <tbody>
-             {currentScore}
+            <tr>
+            <td>
+             {score}
+            </td>
+            </tr>
           </tbody>
         </table>
       </div>
