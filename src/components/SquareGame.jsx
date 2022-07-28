@@ -6,8 +6,8 @@ export const SquareGame = () => {
 
   return (
     <>
-      {square.map(({ color, value }, idx) => (
-        <SquareButton color={color} value={value} key={`squareButton${idx}`}/>
+      {square.map(({ color, value}, idx) => (
+        <SquareButton  color={color} value={value} key={`squareButton${idx}`}/>
       ))}
     </>
   );

@@ -1,40 +1,60 @@
-import { useEffect, useState } from "react"
-import { SquareButton } from "../components/SquareButton";
-import { Context } from "./Context"
+import { useEffect, useState } from "react";
+import { Context } from "./Context";
+import Swal from "sweetalert2";
 
-export const ScoreProvider = ({children}) => {
+export const ScoreProvider = ({ children }) => {
+  const [score, setScore] = useState(0);
+  const [sequence, setSequence] = useState([1,2,3,4,5]);
+  const [currentScore, setCurrentScore] = useState(0)
 
-const [score, setScore] = useState(0)
+  function getRandomArbitrary(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
 
-function getRandomArbitrary(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
-}
+  const randomNumber = () => getRandomArbitrary(1, 9);
 
-const randomNumber =()=>getRandomArbitrary(1,9)
 
-const [sequence, setSequence] = useState([1,2,3,4,5,6,7,8,9])
+  useEffect(() => {
+    const startSequence = () => {
+      setSequence([...sequence, randomNumber()]);
+    };
+    startSequence();
+  }, []);
 
-useEffect(() => {
-  const startSequence=()=>{
- setSequence([...sequence,randomNumber()])
-}
- startSequence()
-  
-}, [sequence])
+  const squareLighting = async () => {
+    
+    for (let currentValue of sequence) {
+     
+      let button = document.getElementById(currentValue);
+      button.style.opacity = "1";
+      await new Promise((r) => setTimeout(r, 1000));
+      button.style.opacity = ".5";
+    }
+    
+  };
+ 
 
-// const squareLighting=()=>{
-//   for( SquareButton of sequence){ 
-//     document.getElementById(sequence.id).id
-//     SquareButton.find(e=> e.value===)
-//     setTimeout
-//   }
-  
-// }
+  const eventComparison=(e)=>{
+    const value =e.target.value
+    
+    if (sequence[currentScore]== value){
+      
+      setCurrentScore(oldScore=>(oldScore+1))
+      setScore((oldData)=>(oldData+10))
+    }else {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Do you want to continue',
+        icon: 'error',
+        confirmButtonText: 'ok'
+      })
+    }
+  }
 
 
   return (
-    <Context.Provider value={{score,setScore}}>
-        {children}
+    <Context.Provider value={{ score, squareLighting ,eventComparison}}>
+      {children}
     </Context.Provider>
-  )
-}
+  );
+};

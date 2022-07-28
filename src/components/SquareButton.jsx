@@ -1,15 +1,16 @@
-import React from 'react'
+import React, { useContext } from "react";
+import { Context } from "../context/Context";
 
-export const SquareButton = ({color, value}) => {
+export const SquareButton = ({ color, value }) => {
+  
+ const {eventComparison} = useContext(Context)
 
-  const clgValue =()=>{
-   console.log(value);
-  }
   return (
-    <button 
-          onClick={ clgValue}
-          className={`${color} m-px border-2 border-black rounded-md opacity-75`}
-          
-        ></button>
-  )
-}
+    <button
+      value={value}
+      id={value}
+      onClick={()=>eventComparison(event)}
+      className={`${color} m-px border-2 border-black rounded-md opacity-50`}
+    ></button>
+  );
+};

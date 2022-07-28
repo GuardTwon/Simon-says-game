@@ -6,7 +6,7 @@ export const Board = () => {
 
   return (
     <div className="  grid justify-items-end">
-      <div className=" m-4 w-28 border-2 border-gray-800 rounded-md text-center   ">
+      <div className=" m-4 w-28 border-2 border-gray-800 rounded-md text-center">
         <table className="w-full justify-items-end">
           <thead className="bg-gray-700 text-white ">
             <tr>
